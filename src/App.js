@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Todos from "./components/Todos";
 import Header from "./components/layout/Header";
@@ -9,30 +9,32 @@ import Footer from "./components/Footer";
 
 import "./App.css";
 
-class App extends Component {
-  state = {
-    todos: [
-      {
-        id: uuidv4(),
-        title: "Take out the trash",
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        title: "Dinner with husband",
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        title: "Meeteng with boss",
-        completed: false,
-      },
-    ],
-  };
+export default function App() {
+  const [state, setState] = useState({ 
+      todos: [
+        {
+          id: uuidv4(),
+          title: "Take out the trash",
+          completed: false,
+        },
+        {
+          id: uuidv4(),
+          title: "Dinner with husband",
+          completed: false,
+        },
+        {
+          id: uuidv4(),
+          title: "Meeteng with boss",
+          completed: false,
+        },
+      ],
+      filter: 'ALL',
+  })
+ 
   // Choose item
-  markItem = (id) => {
-    this.setState({
-      todos: this.state.todos.map((todo) => {
+  const markItem = (id) => {
+    setState({
+      todos: state.todos.map((todo) => {
         if (todo.id === id) {
           todo.completed = !todo.completed;
         }
@@ -42,53 +44,53 @@ class App extends Component {
   };
 
   //Add item
-  addTodo = (title) => {
+  const addTodo = (title) => {
     const newTodo = {
       id: uuidv4(),
       title,
       completed: false,
     };
-    this.setState({ todos: [...this.state.todos, newTodo] });
+    setState({ todos: [...state.todos, newTodo] });
   };
 
   // Delete item
-  delItem = (id) => {
-    this.setState({
-      todos: [...this.state.todos.filter((todo) => todo.id !== id)],
+  const delItem = (id) => {
+    setState({
+      todos: [...state.todos.filter((todo) => todo.id !== id)],
     });
   };
   
   //Show completed item
-  todoCompleted = () => {
-    this.setState({
-      todos: [...this.state.todos.filter((todo) => todo.completed === true)],
-    });
-    // console.log(this.state.todos.filter((todo)=> todo.completed === true))
-  };
+  // todoCompleted = () => {
+  //   this.setState({
+  //     todos: [...this.state.todos.filter((todo) => todo.completed === true)],
+  //   });
+  //   // console.log(this.state.todos.filter((todo)=> todo.completed === true))
+  // };
 
-  //Show active items
-  todoActive = () => {
-    this.setState({
-      todos: [...this.state.todos.filter((todo) => todo.completed === false)],
-    });
-  };
+  // //Show active items
+  // todoActive = () => {
+  //   this.setState({
+  //     todos: [...this.state.todos.filter((todo) => todo.completed === false)],
+  //   });
+  // };
 
-  //Show all items
-  todoAll = () => {
-    // this.setState({
-    //   todos: this.state.todos.map((todo) => todo),
-    // });
-    this.setState({ todos: [...this.state.todos] });
-  };
+  // //Show all items
+  // todoAll = () => {
+  //   // this.setState({
+  //   //   todos: this.state.todos.map((todo) => todo),
+  //   // });
+  //   this.setState({ todos: [...this.state.todos] });
+  // };
   
-  //CleanCompleted
-  clear = () => {
-    this.setState({
-      todos: [...this.state.todos.filter((todo) => todo.completed === false)],
-    });
-  } 
+  // //CleanCompleted
+  // clear = () => {
+  //   this.setState({
+  //     todos: [...this.state.todos.filter((todo) => todo.completed === false)],
+  //   });
+  // } 
 
-  render() {
+
     return (
       <Router>
         <div className="App">
@@ -99,20 +101,20 @@ class App extends Component {
               path="/"
               render={(props) => (
                 <React.Fragment>
-                  <AddTodo addTodo={this.addTodo} />
+                  <AddTodo addTodo={addTodo} />
                   <Todos
-                    todos={this.state.todos}
-                    markItem={this.markItem}
-                    delItem={this.delItem}
-                    todoCompleted={this.todoCompleted}
+                    todos={state.todos}
+                    markItem={markItem}
+                    delItem={delItem}
+                    // todoCompleted={this.todoCompleted}
                   />
                   <Footer
-                    todos={this.state.todos}
-                    markItem={this.markItem}
-                    todoCompleted={this.todoCompleted}
-                    todoAll={this.todoAll}
-                    todoActive={this.todoActive}
-                    clear={this.clear}
+                    todos={state.todos}
+                    markItem={markItem}
+                    // todoCompleted={this.todoCompleted}
+                    // todoAll={this.todoAll}
+                    // todoActive={this.todoActive}
+                    // clear={this.clear}
                   />
                 </React.Fragment>
               )}
@@ -123,6 +125,5 @@ class App extends Component {
       </Router>
     );
   }
-}
 
-export default App;
+
