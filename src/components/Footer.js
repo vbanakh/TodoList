@@ -1,16 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 
-export class Footer extends Component {
-  render() {
+export default function Footer ({ todoAll, todoActive, todoCompleted, clear})  {
     return (
-      <div>
-        <button onClick={this.props.todoAll}>All</button>
-        <button onClick={this.props.todoActive}>Active</button>
-        <button onClick={this.props.todoCompleted}>Completed</button>
-        <button onClick={this.props.clear}>Clear completed</button>
-      </div>
-    );
-  }
+        <div>
+          <button onClick={todoAll}>All</button>
+          <button onClick={todoActive}>Active</button>
+          <button onClick={todoCompleted}>Completed</button>
+          <button onClick={clear}>Clear completed</button>
+        </div>
+      );
 }
-
-export default Footer;
