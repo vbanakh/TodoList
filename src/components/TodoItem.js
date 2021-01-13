@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function TodoItem({todo, markItem, delItem}) {
-  getStyle = () => {
+ const getStyle = () => {
     return {
       borderBottom: "1px dotted #ccc",
       padding: "10px",
