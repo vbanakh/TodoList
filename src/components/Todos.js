@@ -1,17 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Todoitem from "./TodoItem";
 
-class Todos extends Component {
-  render() {
-    return this.props.todos.map((todo) => (
-      <Todoitem
-        key={todo.id}
-        todo={todo}
-        markItem={this.props.markItem}
-        delItem={this.props.delItem}
-      />
-    ));
-  }
+export default function Todos({ todos, markItem, delItem }) {
+  return todos.map((todo) => (
+    <Todoitem key={todo.id} todo={todo} markItem={markItem} delItem={delItem} />
+  ));
 }
-
-export default Todos;
