@@ -24,10 +24,6 @@ export class TodoItem extends Component {
     }
 }
 
-// const itemStyle ={
-//     backgroundColor: 'blue'
-// }
-
 const btnStyle = {
     backgroundColor: 'red',
     color: 'white',
