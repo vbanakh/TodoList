@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class TodoItem extends Component {
+export default function TodoItem() {
     getStyle= () =>{
         return{
             borderBottom: '1px dotted #ccc',
