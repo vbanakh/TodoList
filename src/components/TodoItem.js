@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function TodoItem({todo, markItem, delItem}) {
- const getStyle = () => {
+export default function TodoItem({ todo, markItem, delItem }) {
+  const getStyle = () => {
     return {
       borderBottom: "1px dotted #ccc",
       padding: "10px",
@@ -22,8 +22,7 @@ export default function TodoItem({todo, markItem, delItem}) {
   return (
     <div style={getStyle()}>
       <p>
-        <input type="checkbox" onChange={markItem.bind(this, id)} />{" "}
-        {title}
+        <input type="checkbox" onChange={markItem.bind(this, id)} /> {title}
         <button style={btnStyle} onClick={delItem.bind(this, id)}>
           x
         </button>
@@ -31,4 +30,3 @@ export default function TodoItem({todo, markItem, delItem}) {
     </div>
   );
 }
-

@@ -5,32 +5,53 @@ import Header from "./components/layout/Header";
 import AddTodo from "./components/AddTodo";
 import { v4 as uuidv4 } from "uuid";
 import About from "./components/pages/About";
-import Footer from "./components/Footer";
+import FilterButton from "./components/FilterButton";
+import ClearButton from "./components/ClearButton";
 
 import "./App.css";
 
+
+const FILTER_MAP = {
+  All: () => true,
+  Active: todo => !todo.completed,
+  Completed: todo => todo.completed
+};
+
+const FILTER_NAMES = Object.keys(FILTER_MAP);
+
+
 export default function App() {
-  const [state, setState] = useState({ 
-      todos: [
-        {
-          id: uuidv4(),
-          title: "Take out the trash",
-          completed: false,
-        },
-        {
-          id: uuidv4(),
-          title: "Dinner with husband",
-          completed: false,
-        },
-        {
-          id: uuidv4(),
-          title: "Meeteng with boss",
-          completed: false,
-        },
-      ],
-      filter: 'ALL',
-  })
- 
+  const [state, setState] = useState({
+    todos: [
+      {
+        id: uuidv4(),
+        title: "Take out the trash",
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        title: "Dinner with husband",
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        title: "Meeting with boss",
+        completed: false,
+      },
+    ]
+  });
+
+  const [filter, setFilter] = useState('All');
+
+  const filterList = FILTER_NAMES.map(name =>(
+    <FilterButton
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      setFilter={setFilter}
+    />
+  ));
+
   // Choose item
   const markItem = (id) => {
     setState({
@@ -59,71 +80,41 @@ export default function App() {
       todos: [...state.todos.filter((todo) => todo.id !== id)],
     });
   };
-  
-  //Show completed item
-  // todoCompleted = () => {
-  //   this.setState({
-  //     todos: [...this.state.todos.filter((todo) => todo.completed === true)],
-  //   });
-  //   // console.log(this.state.todos.filter((todo)=> todo.completed === true))
-  // };
 
-  // //Show active items
-  // todoActive = () => {
-  //   this.setState({
-  //     todos: [...this.state.todos.filter((todo) => todo.completed === false)],
-  //   });
-  // };
-
-  // //Show all items
-  // todoAll = () => {
-  //   // this.setState({
-  //   //   todos: this.state.todos.map((todo) => todo),
-  //   // });
-  //   this.setState({ todos: [...this.state.todos] });
-  // };
-  
-  // //CleanCompleted
-  // clear = () => {
-  //   this.setState({
-  //     todos: [...this.state.todos.filter((todo) => todo.completed === false)],
-  //   });
-  // } 
-
-
-    return (
-      <Router>
-        <div className="App">
-          <div className="container">
-            <Header />
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <React.Fragment>
-                  <AddTodo addTodo={addTodo} />
-                  <Todos
-                    todos={state.todos}
-                    markItem={markItem}
-                    delItem={delItem}
-                    // todoCompleted={this.todoCompleted}
-                  />
-                  <Footer
-                    todos={state.todos}
-                    markItem={markItem}
-                    // todoCompleted={this.todoCompleted}
-                    // todoAll={this.todoAll}
-                    // todoActive={this.todoActive}
-                    // clear={this.clear}
-                  />
-                </React.Fragment>
-              )}
-            />
-            <Route path="/about" component={About} />
-          </div>
-        </div>
-      </Router>
-    );
+  //CleanCompleted
+  function clear() {
+    setState({
+      todos: [...state.todos.filter(todo => !todo.completed)],
+    });
   }
 
-
+  return (
+    <Router>
+      <div className="App">
+        <div className="container">
+          <Header />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <React.Fragment>
+                <AddTodo addTodo={addTodo} />
+                <Todos
+                  todos={state.todos}
+                  markItem={markItem}
+                  delItem={delItem}
+                  FILTER_MAP={FILTER_MAP[filter]}
+                />
+                 <FilterButton filterList={filterList[0]}/>
+                 <FilterButton filterList={filterList[1]}/>
+                 <FilterButton filterList={filterList[2]}/>
+                 <ClearButton clear={clear}/>
+              </React.Fragment>
+            )}
+          />
+          <Route path="/about" component={About} />
+        </div>
+      </div>
+    </Router>
+  );
+}
