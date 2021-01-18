@@ -4,7 +4,6 @@ import Todos from "./components/Todos";
 import Header from "./components/layout/Header";
 import AddTodo from "./components/AddTodo";
 import { v4 as uuidv4 } from "uuid";
-import About from "./components/pages/About";
 import FilterButton from "./components/FilterButton";
 import ClearButton from "./components/ClearButton";
 
@@ -112,7 +111,6 @@ export default function App() {
               </React.Fragment>
             )}
           />
-          <Route path="/about" component={About} />
         </div>
       </div>
     </Router>

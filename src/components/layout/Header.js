@@ -17,7 +17,7 @@ console.log(num.toFixed(2));
       <ul style={styleList}>
         {data.filter(item => item.ccy === "USD" || item.ccy === "EUR").map((item) => (
           <li style={liStyle} key={item.ccy}>
-            {item.ccy} Buy: {item.buy} Sale: {item.sale} 
+            {item.ccy} {item.buy} : {item.sale}  
           </li>  
         ))}
       </ul>
