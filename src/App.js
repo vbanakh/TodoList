@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import Todos from "./components/Todos";
 import Header from "./components/layout/Header";
 import AddTodo from "./components/AddTodo";
@@ -88,14 +87,9 @@ export default function App() {
   }
 
   return (
-    <Router>
       <div className="App">
         <div className="container">
           <Header />
-          <Route
-            exact
-            path="/"
-            render={() => (
               <React.Fragment>
                 <AddTodo addTodo={addTodo} />
                 <Todos
@@ -109,10 +103,7 @@ export default function App() {
                  <FilterButton filterList={filterList[2]}/>
                  <ClearButton clear={clear}/>
               </React.Fragment>
-            )}
-          />
         </div>
       </div>
-    </Router>
   );
 }
