@@ -107,7 +107,9 @@ export default function App() {
                  <FilterButton filterList={filterList[0]}/>
                  <FilterButton filterList={filterList[1]}/>
                  <FilterButton filterList={filterList[2]}/>
-                 <ClearButton clear={clear}/>
+                 <ClearButton 
+                  todos={state.todos}
+                  clear={clear}/>
               </React.Fragment>
             )}
           />
