@@ -9,15 +9,13 @@ import ClearButton from "./components/ClearButton";
 
 import "./App.css";
 
-
 const FILTER_MAP = {
   All: () => true,
-  Active: todo => !todo.completed,
-  Completed: todo => todo.completed
+  Active: (todo) => !todo.completed,
+  Completed: (todo) => todo.completed,
 };
 
 const FILTER_NAMES = Object.keys(FILTER_MAP);
-
 
 export default function App() {
   const [state, setState] = useState({
@@ -37,12 +35,12 @@ export default function App() {
         title: "Meeting with boss",
         completed: false,
       },
-    ]
+    ],
   });
 
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState("All");
 
-  const filterList = FILTER_NAMES.map(name =>(
+  const filterList = FILTER_NAMES.map((name) => (
     <FilterButton
       key={name}
       name={name}
@@ -83,8 +81,12 @@ export default function App() {
   //CleanCompleted
   function clear() {
     setState({
-      todos: [...state.todos.filter(todo => !todo.completed)],
+      todos: [...state.todos.filter((todo) => !todo.completed)],
     });
+  }
+
+  function showTodos() {
+    return state.todos.filter(FILTER_MAP[filter]);
   }
 
   return (
@@ -102,12 +104,12 @@ export default function App() {
                   todos={state.todos}
                   markItem={markItem}
                   delItem={delItem}
-                  FILTER_MAP={FILTER_MAP[filter]}
+                  showTodos={showTodos}
                 />
-                 <FilterButton filterList={filterList[0]}/>
-                 <FilterButton filterList={filterList[1]}/>
-                 <FilterButton filterList={filterList[2]}/>
-                 <ClearButton clear={clear}/>
+                <FilterButton filterList={filterList[0]} />
+                <FilterButton filterList={filterList[1]} />
+                <FilterButton filterList={filterList[2]} />
+                <ClearButton clear={clear} />
               </React.Fragment>
             )}
           />
