@@ -18,11 +18,11 @@ export default function TodoItem({ todo, markItem, delItem }) {
     padding: "5px 10px",
     float: "right",
   };
-  const { id, title } = todo;
+  const { id, title, completed } = todo;
   return (
     <div style={getStyle()}>
       <p>
-        <input type="checkbox" onChange={markItem.bind(this, id)} /> {title}
+        <input type="checkbox" onChange={markItem.bind(this, id)} checked={completed} /> {title}
         <button style={btnStyle} onClick={delItem.bind(this, id)}>
           x
         </button>
