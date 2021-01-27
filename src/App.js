@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import FilterButton from "./components/FilterButton";
 import ClearButton from "./components/ClearButton";
 
-import "./App.css";
+import "./App.scss";
 
 
 const FILTER_MAP = {
