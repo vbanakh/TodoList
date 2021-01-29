@@ -100,10 +100,12 @@ export default function App() {
                   delItem={delItem}
                   showTodos={showTodos}
                 />
-                <FilterButton filterList={filterList[0]} />
-                <FilterButton filterList={filterList[1]} />
-                <FilterButton filterList={filterList[2]} />
-                <ClearButton clear={clear} />
+                 <FilterButton filterList={filterList[0]}/>
+                 <FilterButton filterList={filterList[1]}/>
+                 <FilterButton filterList={filterList[2]}/>
+                 <ClearButton 
+                  todos={state.todos}
+                  clear={clear}/>
               </React.Fragment>
         </div>
       </div>

@@ -30,6 +30,20 @@ a{
   outline: none;
 }
 
+
+.btnHidden{
+  display: none;
+}
+
+.btnClear{
+  display: inline-block;
+  border: none;
+  background: red;
+  color: #fff;
+  padding: 7px 20px;
+  cursor: pointer;
+}
+
 .btnPressed{
   display: inline-block;
   border: none;
@@ -43,3 +57,4 @@ a{
   background:rgb(16, 196, 16);
   outline: none;
 }
+
