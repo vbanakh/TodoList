@@ -25,17 +25,36 @@ a{
   cursor: pointer;
 }
 
-.btn:hover{
+.btn:hover:focus{
   background: #666;
+  outline: none;
 }
 
 
-/* .visually-hidden {
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap;
-} */
+.btnHidden{
+  display: none;
+}
+
+.btnClear{
+  display: inline-block;
+  border: none;
+  background: red;
+  color: #fff;
+  padding: 7px 20px;
+  cursor: pointer;
+}
+
+.btnPressed{
+  display: inline-block;
+  border: none;
+  background:rgb(16, 196, 16);
+  color: #fff;
+  padding: 7px 20px;
+  cursor: pointer;
+}
+
+.btnPressed:focus{
+  background:rgb(16, 196, 16);
+  outline: none;
+}
+
