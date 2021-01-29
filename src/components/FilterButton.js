@@ -6,7 +6,7 @@ export default function FilterButton(filterList) {
   return (
     <button
       type="button"
-      className="btn btn-secondary"
+      className={isPressed ? "btnPressed" : "btn" }
       aria-pressed={isPressed}
       onClick={() => setFilter(name)}
     >
