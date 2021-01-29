@@ -9,6 +9,7 @@ export default function TodoItem({ todo, markItem, delItem }) {
       textDecoration: todo.completed ? "line-through" : "none",
     };
   };
+
   const btnStyle = {
     backgroundColor: "red",
     color: "white",
@@ -19,6 +20,7 @@ export default function TodoItem({ todo, markItem, delItem }) {
     float: "right",
   };
   const { id, title, completed } = todo;
+
   return (
     <div style={getStyle()}>
       <p>
@@ -30,3 +32,13 @@ export default function TodoItem({ todo, markItem, delItem }) {
     </div>
   );
 }
+
+const btnStyle = {
+  backgroundColor: "red",
+  color: "white",
+  borderRadius: "50%",
+  cursor: "pointer",
+  border: "none",
+  padding: "5px 10px",
+  float: "right",
+};
