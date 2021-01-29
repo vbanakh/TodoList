@@ -10,15 +10,6 @@ export default function TodoItem({ todo, markItem, delItem }) {
     };
   };
 
-  const btnStyle = {
-    backgroundColor: "red",
-    color: "white",
-    borderRadius: "50%",
-    cursor: "pointer",
-    border: "none",
-    padding: "5px 10px",
-    float: "right",
-  };
   const { id, title, completed } = todo;
 
   return (
