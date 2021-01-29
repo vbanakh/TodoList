@@ -27,7 +27,7 @@ export default function App() {
       {
         id: uuidv4(),
         title: "Dinner with husband",
-        completed: false,
+        completed: true,
       },
       {
         id: uuidv4(),
