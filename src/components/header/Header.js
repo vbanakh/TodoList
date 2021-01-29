@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import style from './header.scss';
-import  getCurrencyRate from '../../shared/services/currencyExchange';
+import style from "./../header/header.module.scss";
+import getCurrencyRate from "../../shared/services/currencyExchange";
 
 export default function Header() {
   const [currencyRate, setCurrencyRate] = useState([]);
@@ -11,10 +11,12 @@ export default function Header() {
 
   return (
     <header className={style.header}>
-      <h1>TodoList</h1>
+      <h1>Todo List</h1>
       <ul style={styleList}>
         {currencyRate
-          .filter((currency) => currency.ccy === "USD" || currency.ccy === "EUR")
+          .filter(
+            (currency) => currency.ccy === "USD" || currency.ccy === "EUR"
+          )
           .map((currency) => (
             <li style={liStyle} key={currency.ccy}>
               {currency.ccy} {currency.buy} : {currency.sale}
@@ -24,8 +26,6 @@ export default function Header() {
     </header>
   );
 }
-
-
 
 const styleList = {
   margin: "10px",
