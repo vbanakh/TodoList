@@ -89,7 +89,7 @@ export default function App() {
   }
 
   return (
-      <div className="App">
+      <div className="app">
         <div className="container">
           <Header />
               <React.Fragment>
