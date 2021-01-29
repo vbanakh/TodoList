@@ -2,7 +2,7 @@ import React from "react";
 
 export default function FilterButton(filterList) {
   const { isPressed, setFilter, name } = filterList.filterList.props;
-
+ 
   return (
     <button
       type="button"
