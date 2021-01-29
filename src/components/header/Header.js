@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from './header.scss';
-import  getCurrencyRate from '../shared/services/currencyExchange';
+import  getCurrencyRate from '../../shared/services/currencyExchange';
 
 export default function Header() {
   const [currencyRate, setCurrencyRate] = useState([]);
