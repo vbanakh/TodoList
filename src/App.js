@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import Todos from "./components/Todos";
-import Header from "./components/layout/Header";
+import Header from "./components/header/Header";
 import AddTodo from "./components/AddTodo";
 import { v4 as uuidv4 } from "uuid";
 import FilterButton from "./components/FilterButton";
@@ -9,15 +8,13 @@ import ClearButton from "./components/ClearButton";
 
 import "./App.css";
 
-
 const FILTER_MAP = {
   All: () => true,
-  Active: todo => !todo.completed,
-  Completed: todo => todo.completed
+  Active: (todo) => !todo.completed,
+  Completed: (todo) => todo.completed,
 };
 
 const FILTER_NAMES = Object.keys(FILTER_MAP);
-
 
 export default function App() {
   const [state, setState] = useState({
@@ -30,19 +27,19 @@ export default function App() {
       {
         id: uuidv4(),
         title: "Dinner with husband",
-        completed: false,
+        completed: true,
       },
       {
         id: uuidv4(),
         title: "Meeting with boss",
         completed: false,
       },
-    ]
+    ],
   });
 
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState("All");
 
-  const filterList = FILTER_NAMES.map(name =>(
+  const filterList = FILTER_NAMES.map((name) => (
     <FilterButton
       key={name}
       name={name}
@@ -83,26 +80,25 @@ export default function App() {
   //CleanCompleted
   function clear() {
     setState({
-      todos: [...state.todos.filter(todo => !todo.completed)],
+      todos: [...state.todos.filter((todo) => !todo.completed)],
     });
   }
 
+  function showTodos() {
+    return state.todos.filter(FILTER_MAP[filter]);
+  }
+
   return (
-    <Router>
       <div className="App">
         <div className="container">
           <Header />
-          <Route
-            exact
-            path="/"
-            render={() => (
               <React.Fragment>
                 <AddTodo addTodo={addTodo} />
                 <Todos
                   todos={state.todos}
                   markItem={markItem}
                   delItem={delItem}
-                  FILTER_MAP={FILTER_MAP[filter]}
+                  showTodos={showTodos}
                 />
                  <FilterButton filterList={filterList[0]}/>
                  <FilterButton filterList={filterList[1]}/>
@@ -111,10 +107,7 @@ export default function App() {
                   todos={state.todos}
                   clear={clear}/>
               </React.Fragment>
-            )}
-          />
         </div>
       </div>
-    </Router>
   );
 }
