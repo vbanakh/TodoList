@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import style from './header.scss'
 
 export default function Header() {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ const num = 5.5698768;
 console.log(num.toFixed(2));
 
   return (
-    <header style={headerStyle}>
+    <header className={style.header}>
       <h1>TodoList</h1>
       <ul style={styleList}>
         {data.filter(item => item.ccy === "USD" || item.ccy === "EUR").map((item) => (
@@ -25,12 +26,7 @@ console.log(num.toFixed(2));
   );
 }
 
-const headerStyle = {
-  background: "#333",
-  color: "#fff",
-  textAlign: "center",
-  padding: "10px",
-};
+
 
 const styleList = {
     display: "flex",
