@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
-import CurrencyExchange from "../../shared/services/currencyExchange";
-
+import getCurrencyRate from "../../shared/services/currencyExchange";
 
 export default function Header() {
-  const [data, setData] = useState([]);
+  const [currencyRate, setCurrencyRate] = useState([]);
 
   useEffect(() => {
-    CurrencyExchange()
-      .then((json) => setData(json))
-  }, [])
- 
+    getCurrencyRate().then(setCurrencyRate);
+  }, []);
+
   return (
     <header style={headerStyle}>
       <h1>TodoList</h1>
       <ul style={styleList}>
-        {data.filter(item => item.ccy === "USD" || item.ccy === "EUR").map((item) => (
-          <li style={liStyle} key={item.ccy}>
-            {item.ccy} {item.buy} : {item.sale} 
-          </li>  
-        ))}
+        {currencyRate
+          .filter((currency) => currency.ccy === "USD" || currency.ccy === "EUR")
+          .map((currency) => (
+            <li style={liStyle} key={currency.ccy}>
+              {currency.ccy} {currency.buy} : {currency.sale}
+            </li>
+          ))}
       </ul>
     </header>
   );
@@ -32,10 +32,10 @@ const headerStyle = {
 };
 
 const styleList = {
-    margin: "10px",
-    padding: "10px",
-}
+  margin: "10px",
+  padding: "10px",
+};
 
 const liStyle = {
-    listStyle: "none",
-}
+  listStyle: "none",
+};
