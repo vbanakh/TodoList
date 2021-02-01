@@ -1,4 +1,5 @@
 import React from "react";
+import style from "../filterButton/filterButton.module.scss";
 
 export default function FilterButton(filterList) {
   const { isPressed, setFilter, name } = filterList.filterList.props;
@@ -6,7 +7,7 @@ export default function FilterButton(filterList) {
   return (
     <button
       type="button"
-      className={isPressed ? "btnPressed" : "btn" }
+      className={isPressed ? style.btnPressed : style.btn }
       aria-pressed={isPressed}
       onClick={() => setFilter(name)}
     >

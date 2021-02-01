@@ -1,0 +1,13 @@
+@mixin basic-btn {
+  display: inline-block;
+  padding: 7px 20px;
+  outline: none;
+  border-radius: 30px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+@mixin bg-and-color-btn($bg-btn-color, $text-btn-color) {
+  background-color: $bg-btn-color;
+  color: $text-btn-color;
+}

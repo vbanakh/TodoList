@@ -1,0 +1,16 @@
+@import "../../shared/styles/variables";
+@import "../../shared/styles/mixins";
+
+.btnHidden {
+  display: none;
+}
+
+.btnClear {
+  @include basic-btn;
+  @include bg-and-color-btn( #fff, $red-btn-color);
+  border: 1px solid $red-btn-color;
+  &:hover{
+  @include bg-and-color-btn($red-btn-color, $main-text-color);
+  transition: all 1s;
+  }
+}

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Todos from "./components/Todos";
 import Header from "./components/header/Header";
-import AddTodo from "./components/AddTodo";
+import AddTodo from "./components/addTodo/AddTodo";
 import { v4 as uuidv4 } from "uuid";
-import FilterButton from "./components/FilterButton";
-import ClearButton from "./components/ClearButton";
+import FilterButton from "./components/filterButton/FilterButton";
+import ClearButton from "./components/clearButton/ClearButton";
 
 import "./App.scss";
 
@@ -89,25 +89,23 @@ export default function App() {
   }
 
   return (
-      <div className="App">
-        <div className="container">
-          <Header />
-              <React.Fragment>
-                <AddTodo addTodo={addTodo} />
-                <Todos
-                  todos={state.todos}
-                  markItem={markItem}
-                  delItem={delItem}
-                  showTodos={showTodos}
-                />
-                 <FilterButton filterList={filterList[0]}/>
-                 <FilterButton filterList={filterList[1]}/>
-                 <FilterButton filterList={filterList[2]}/>
-                 <ClearButton 
-                  todos={state.todos}
-                  clear={clear}/>
-              </React.Fragment>
-        </div>
+    <div className="app">
+      <div className="container">
+        <Header />
+        <React.Fragment>
+          <AddTodo addTodo={addTodo} />
+          <Todos
+            todos={state.todos}
+            markItem={markItem}
+            delItem={delItem}
+            showTodos={showTodos}
+          />
+          <FilterButton filterList={filterList[0]} />
+          <FilterButton filterList={filterList[1]} />
+          <FilterButton filterList={filterList[2]} />
+          <ClearButton todos={state.todos} clear={clear} />
+        </React.Fragment>
       </div>
+    </div>
   );
 }

@@ -1,0 +1,21 @@
+@import "../../shared/styles/variables";
+@import "../../shared/styles/mixins";
+
+.btn {
+  @include basic-btn;
+  @include bg-and-color-btn(#fff, $main-color);
+  border: 1px solid $main-color;
+  &:hover {
+    @include bg-and-color-btn($main-color, #fff);
+    transition: all 1s;
+  }
+}
+
+.btnPressed {
+  @include basic-btn;
+  @include bg-and-color-btn($main-color, #fff);
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
