@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Todos from "./components/Todos";
 import Header from "./components/header/Header";
 import AddTodo from "./components/addTodo/AddTodo";
 import { v4 as uuidv4 } from "uuid";
 import FilterButton from "./components/filterButton/FilterButton";
 import ClearButton from "./components/clearButton/ClearButton";
+import CurrencyRate from "./components/currencyRate/CurrencyRate";
 
 import "./App.scss";
 
@@ -89,23 +91,32 @@ export default function App() {
   }
 
   return (
-    <div className="app">
-      <div className="container">
-        <Header />
-        <React.Fragment>
-          <AddTodo addTodo={addTodo} />
-          <Todos
-            todos={state.todos}
-            markItem={markItem}
-            delItem={delItem}
-            showTodos={showTodos}
-          />
-          <FilterButton filterList={filterList[0]} />
-          <FilterButton filterList={filterList[1]} />
-          <FilterButton filterList={filterList[2]} />
-          <ClearButton todos={state.todos} clear={clear} />
-        </React.Fragment>
+    <Router>
+      <div className="app">
+        <div className="container">
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <React.Fragment>
+                <AddTodo addTodo={addTodo} />
+                <Todos
+                  todos={state.todos}
+                  markItem={markItem}
+                  delItem={delItem}
+                  showTodos={showTodos}
+                />
+                <FilterButton filterList={filterList[0]} />
+                <FilterButton filterList={filterList[1]} />
+                <FilterButton filterList={filterList[2]} />
+                <ClearButton todos={state.todos} clear={clear} />
+              </React.Fragment>
+            </Route>
+            <Route path="/currency">
+              <CurrencyRate />
+            </Route>
+          </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }

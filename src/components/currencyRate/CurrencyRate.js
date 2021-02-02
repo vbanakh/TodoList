@@ -10,13 +10,13 @@ export default function CurrencyRate() {
   }, []);
   return (
     <div>
-      <ul style={style.styleList}>
+      <ul className={style.styleList}>
         {currencyRate
           .filter(
             (currency) => currency.ccy === "USD" || currency.ccy === "EUR"
           )
           .map((currency) => (
-            <li style={style.liStyle} key={currency.ccy}>
+            <li className={style.liStyle} key={currency.ccy}>
               {currency.ccy} {currency.buy} : {currency.sale}
             </li>
           ))}
