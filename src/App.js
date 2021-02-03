@@ -112,7 +112,9 @@ export default function App() {
   }
 
   function getFilteredTodos() {
-   return state.todos.filter(FILTER_MAP.filter(item => item[filter])[0][filter].filterTodo);
+    return state.todos.filter(
+      FILTER_MAP.filter((item) => item[filter])[0][filter].filterTodo
+    );
   }
 
   return (
