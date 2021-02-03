@@ -8,13 +8,39 @@ import ClearButton from "./components/clearButton/ClearButton";
 
 import "./App.scss";
 
-const FILTER_MAP = {
-  All: () => true,
-  Active: (todo) => !todo.completed,
-  Completed: (todo) => todo.completed,
-};
+const FILTER_MAP = [
+  {
+    ALL: {
+      name: "ALL",
+      id: "ALL",
+      filterTodo: () => true,
+    },
+  },
+  {
+    ACTIVE: {
+      name: "ACTIVE",
+      id: "ACTIVE",
+      filterTodo: (todo) => !todo.completed,
+    },
+  },
+  {
+    COMPLETED: {
+      name: "COMPLETED",
+      id: "COMPLETED",
+      filterTodo: (todo) => todo.completed,
+    },
+  },
+];
 
-const FILTER_NAMES = Object.keys(FILTER_MAP);
+// };
+// console.log(FILTER_MAP.map((item) => item));
+
+//   Active: (todo) => !todo.completed,
+//   Completed: (todo) => todo.completed,
+// ;
+
+// const FILTER_NAMES = Object.keys(FILTER_MAP);
+// console.log(FILTER_NAMES);
 
 export default function App() {
   const [state, setState] = useState({
@@ -37,19 +63,20 @@ export default function App() {
     ],
   });
 
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState(FILTER_MAP[0].ALL.id);
 
-  const filterList = FILTER_NAMES.map((name) => (
+  const filterList = FILTER_MAP.map((item) => (
     <FilterButton
-      key={name}
-      name={name}
-      isPressed={name === filter}
+      key={item.id}
+      name={item.name}
+      isPressed={item.name === filter}
       setFilter={setFilter}
     />
   ));
+  console.log(filterList);
 
   // Choose item
-  const markItem = (id) => {
+  function markItem(id) {
     setState({
       todos: state.todos.map((todo) => {
         if (todo.id === id) {
@@ -58,7 +85,7 @@ export default function App() {
         return todo;
       }),
     });
-  };
+  }
 
   //Add item
   const addTodo = (title) => {
@@ -84,8 +111,8 @@ export default function App() {
     });
   }
 
-  function showTodos() {
-    return state.todos.filter(FILTER_MAP[filter]);
+  function getFilteredTodos() {
+   return state.todos.filter(FILTER_MAP.filter(item => item[filter])[0][filter].filterTodo);
   }
 
   return (
@@ -98,11 +125,11 @@ export default function App() {
             todos={state.todos}
             markItem={markItem}
             delItem={delItem}
-            showTodos={showTodos}
+            getFilteredTodos={getFilteredTodos}
           />
-          <FilterButton filterList={filterList[0]} />
-          <FilterButton filterList={filterList[1]} />
-          <FilterButton filterList={filterList[2]} />
+          <FilterButton filterList={filterList} />
+          {/* <FilterButton filterList={filterList[1]} />
+          <FilterButton filterList={filterList[2]} /> */}
           <ClearButton todos={state.todos} clear={clear} />
         </React.Fragment>
       </div>
