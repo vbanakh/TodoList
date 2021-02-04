@@ -1,37 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import style from "./../header/header.module.scss";
-import getCurrencyRate from "../../shared/services/currencyExchange";
 
 export default function Header() {
-  const [currencyRate, setCurrencyRate] = useState([]);
-
-  useEffect(() => {
-    getCurrencyRate().then(setCurrencyRate);
-  }, []);
-
   return (
     <header className={style.header}>
-      <h1>Todo List</h1>
-      <ul style={styleList}>
-        {currencyRate
-          .filter(
-            (currency) => currency.ccy === "USD" || currency.ccy === "EUR"
-          )
-          .map((currency) => (
-            <li style={liStyle} key={currency.ccy}>
-              {currency.ccy} {currency.buy} : {currency.sale}
-            </li>
-          ))}
-      </ul>
+      <h1> <Link to="/"  className={style.header}>To-do</Link>  |  <Link to="/currency"  className={style.header}>Currency rate</Link></h1>
     </header>
   );
 }
-
-const styleList = {
-  margin: "10px",
-  padding: "10px",
-};
-
-const liStyle = {
-  listStyle: "none",
-};
