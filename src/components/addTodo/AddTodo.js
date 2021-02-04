@@ -8,8 +8,10 @@ export default function AddTodo({ addTodo }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addTodo(newItem.title);
-    setNewItem({ title: "" });
+    if(newItem.title){
+      addTodo(newItem.title);
+      setNewItem({ title: "" });
+    }
   };
   return (
     <form onSubmit={onSubmit} className={style.form}>
