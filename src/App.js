@@ -32,16 +32,6 @@ const FILTER_MAP = [
   },
 ];
 
-// };
-// console.log(FILTER_MAP.map((item) => item));
-
-//   Active: (todo) => !todo.completed,
-//   Completed: (todo) => todo.completed,
-// ;
-
-// const FILTER_NAMES = Object.keys(FILTER_MAP);
-// console.log(FILTER_NAMES);
-
 export default function App() {
   const [state, setState] = useState({
     todos: [
@@ -65,18 +55,8 @@ export default function App() {
 
   const [filter, setFilter] = useState(FILTER_MAP[0].ALL.id);
 
-  const filterList = FILTER_MAP.map((item) => (
-    <FilterButton
-      key={item.id}
-      name={item.name}
-      isPressed={item.name === filter}
-      setFilter={setFilter}
-    />
-  ));
-  console.log(filterList);
-
-  // Choose item
-  function markItem(id) {
+  // Mark as checked to-do
+  function markTodo(id) {
     setState({
       todos: state.todos.map((todo) => {
         if (todo.id === id) {
@@ -87,7 +67,7 @@ export default function App() {
     });
   }
 
-  //Add item
+  //Add new to-do
   const addTodo = (title) => {
     const newTodo = {
       id: uuidv4(),
@@ -97,24 +77,30 @@ export default function App() {
     setState({ todos: [...state.todos, newTodo] });
   };
 
-  // Delete item
-  const delItem = (id) => {
+  // Delete one to-do
+  const deleteTodo = (id) => {
     setState({
       todos: [...state.todos.filter((todo) => todo.id !== id)],
     });
   };
 
-  //CleanCompleted
+  //Delete all completed to-dos
   function clear() {
     setState({
       todos: [...state.todos.filter((todo) => !todo.completed)],
     });
   }
 
+  //Get filtered to-dos
   function getFilteredTodos() {
     return state.todos.filter(
       FILTER_MAP.filter((item) => item[filter])[0][filter].filterTodo
     );
+  }
+
+  //Get key from the filter object
+  function getFilterKeyName(filterObject) {
+    return filterObject[Object.keys(filterObject)];
   }
 
   return (
@@ -125,13 +111,20 @@ export default function App() {
           <AddTodo addTodo={addTodo} />
           <Todos
             todos={state.todos}
-            markItem={markItem}
-            delItem={delItem}
+            markTodo={markTodo}
+            deleteTodo={deleteTodo}
             getFilteredTodos={getFilteredTodos}
           />
-          <FilterButton filterList={filterList} />
-          {/* <FilterButton filterList={filterList[1]} />
-          <FilterButton filterList={filterList[2]} /> */}
+          <FilterButton
+            filterList={FILTER_MAP.map((item) => (
+              <FilterButton
+                key={getFilterKeyName(item).id}
+                name={getFilterKeyName(item).name}
+                isPressed={getFilterKeyName(item).name === filter}
+                setFilter={setFilter}
+              />
+            ))}
+          />
           <ClearButton todos={state.todos} clear={clear} />
         </React.Fragment>
       </div>
