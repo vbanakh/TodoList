@@ -1,0 +1,62 @@
+@import "../../shared/styles/variables";
+@import "../../shared/styles/mixins";
+
+.todoCompleted {
+  @include todo;
+  text-decoration: line-through;
+}
+
+.todoActive {
+  @include todo;
+  text-decoration: none;
+}
+
+.btnDelete {
+  @include bg-and-color-btn($main-text-color, $red-btn-color);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  padding: 5px 10px;
+  float: right;
+  &:hover {
+    @include bg-and-color-btn($red-btn-color, $main-text-color);
+    transition: all 0.5s;
+  }
+}
+
+.checkbox {
+  position: relative;
+  top: -6px;
+  margin: 0 16px 0 0;
+  cursor: pointer;
+}
+
+.checkbox:before {
+  content: "";
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f2f2f2;
+}
+
+.checkbox:checked:before {
+  @include transform-rotate(-45deg);
+  height: 8px;
+  border-color: $main-color;
+  border-top-style: none;
+  border-right-style: none;
+}
+
+.checkbox:after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  cursor: pointer;
+}

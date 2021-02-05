@@ -1,5 +1,5 @@
 import React from "react";
-import Todoitem from "./TodoItem";
+import Todoitem from "../components/todoItem/TodoItem";
 
 export default function Todos({ markItem, delItem, showTodos}) {
   return showTodos().map((todo) => (
