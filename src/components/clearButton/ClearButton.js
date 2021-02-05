@@ -8,7 +8,7 @@ export default function ClearButton({ clear, todos }) {
       className={
         todos.some((todo) => todo.completed) ? style.btnClear : style.btnHidden
       }
-      onClick={() => clear.clear()}
+      onClick={() => clear()}
     >
       <span> Delete completed tasks </span>
     </button>
